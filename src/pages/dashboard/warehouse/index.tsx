@@ -163,8 +163,10 @@ const Warehouse: NextPage = () => {
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        height: '100%'
+                        height: '100%',
+                        py: 4
                     }}
+
                 >
                     {/* <Box sx={{ py: 4 }}>
                         <Box

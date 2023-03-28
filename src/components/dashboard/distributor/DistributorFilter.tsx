@@ -86,7 +86,7 @@ const filterOperators = [
     isPresentOperator
 ];
 
-export const distributorsFilter: FC<DistributorsFilterProps> = (props) => {
+export const DistributorsFilter: FC<DistributorsFilterProps> = (props) => {
     const {
         disabled,
         filters,
@@ -189,20 +189,20 @@ export const distributorsFilter: FC<DistributorsFilterProps> = (props) => {
     );
 };
 
-// distributorsFilter.defaultProps = {
-//   filters: [],
-//   selectedDistrubutors: [],
-//   view: 'all'
-// };
+DistributorsFilter.defaultProps = {
+  filters: [],
+  selectedDistrubutors: [],
+  view: 'all'
+};
 
-// distributorsFilter.propTypes = {
-//   disabled: PropTypes.bool,
-//   filters: PropTypes.array,
-//   onFiltersApply: PropTypes.func,
-//   onFiltersClear: PropTypes.func,
-//   onQueryChange: PropTypes.func,
-//   onViewChange: PropTypes.func,
-//   query: PropTypes.string,
-//   selectedDistrubutors: PropTypes.array,
-//   view: PropTypes.string
-// };
+DistributorsFilter.propTypes = {
+  disabled: PropTypes.bool,
+  filters: PropTypes.array,
+  onFiltersApply: PropTypes.func,
+  onFiltersClear: PropTypes.func,
+  onQueryChange: PropTypes.func,
+  onViewChange: PropTypes.func,
+  query: PropTypes.string,
+  selectedDistrubutors: PropTypes.array,
+  view: PropTypes.string
+};

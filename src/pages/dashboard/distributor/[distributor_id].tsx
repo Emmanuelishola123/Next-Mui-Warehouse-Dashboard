@@ -6,7 +6,6 @@ import DistributorContactListTable from 'src/components/dashboard/distributor/Di
 import MapBox from 'src/components/react-map/MapBox'
 
 
-
 function DistributorDetails() {
   return (
 

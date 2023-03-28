@@ -8,71 +8,51 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Typography } from '@mui/material';
 import { Scrollbar } from 'src/components/scrollbar';
+import type { RowType } from 'src/pages/dashboard/dealer';
 
-function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number,
-) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 interface propsType {
-
-    title: string
-
+    title: string,
+    head: string[],
+    rows: RowType[]
 }
 
-export default function InventoryTable({ title }: propsType) {
+export default function InventoryTable({ title, rows, head }: propsType) {
     return (
-        <TableContainer component={Paper} sx={{  }}>
+        <TableContainer component={Paper} sx={{}}>
             <Typography
                 sx={{ flex: '1 1 100%', p: 2, fontSize: 'xl', color: 'gray', fontWeight: 'semibold' }}
                 variant="h5"
-              
+
                 component="div"
             >
                 {title}
             </Typography>
-          <Scrollbar>
-          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Dessert (100g serving)</TableCell>
-                        <TableCell align="left">Calories</TableCell>
-                        <TableCell align="left">Fat&nbsp;(g)</TableCell>
-                        <TableCell align="left">Carbs&nbsp;(g)</TableCell>
-                        <TableCell align="left">Protein&nbsp;(g)</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map((row) => (
-                        <TableRow
-                            key={row.name}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell component="th" scope="row">
-                                {row.name}
-                            </TableCell>
-                            <TableCell align="left">{row.calories}</TableCell>
-                            <TableCell align="left">{row.fat}</TableCell>
-                            <TableCell align="left">{row.carbs}</TableCell>
-                            <TableCell align="left">{row.protein}</TableCell>
+            <Scrollbar>
+                <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                    <TableHead>
+                        <TableRow>
+                            {head.map(item => <TableCell key={item} align="left">{item}</TableCell>)}
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-          </Scrollbar>
+                    </TableHead>
+                    <TableBody>
+                        {rows.map((row) => (
+                            <TableRow
+                                key={row.warehouse}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    {row.warehouse}
+                                </TableCell>
+                                <TableCell align="left">{row.lastCounted}</TableCell>
+                                <TableCell align="left">${row.totalParts}</TableCell>
+                                <TableCell align="left">${row.costPrices}</TableCell>
+                                <TableCell align="left">${row.salesPrices}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </Scrollbar>
         </TableContainer>
     );
 }

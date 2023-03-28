@@ -5,7 +5,7 @@ import { Box, Button, Card, Container, Divider, Typography } from '@mui/material
 import type { Filter } from 'src/types/filter';
 import { productApi } from 'src/api/product';
 import NewDistributorDialog from 'src/components/dashboard/distributor/NewDistributorDialog';
-import { distributorsFilter } from 'src/components/dashboard/distributor/DistributorFilter';
+import { DistributorsFilter } from 'src/components/dashboard/distributor/DistributorFilter';
 import { DistributorTable } from 'src/components/dashboard/distributor/DistributorTable';
 import type { Product } from 'src/types/product';
 import { useMounted } from 'src/hooks/use-mounted';
@@ -189,7 +189,7 @@ const DistributorPage: NextPage = () => {
               flexGrow: 1
             }}
           >
-            <distributorsFilter
+            <DistributorsFilter
               disabled={productsState.isLoading}
               filters={controller.filters}
               onFiltersApply={handleFiltersApply}
@@ -197,7 +197,7 @@ const DistributorPage: NextPage = () => {
               onQueryChange={handleQueryChange}
               onViewChange={handleViewChange}
               query={controller.query}
-              selectedProducts={selectedProducts}
+              selectedDistrubutors={selectedProducts}
               view={controller.view}
             />
             <Divider />

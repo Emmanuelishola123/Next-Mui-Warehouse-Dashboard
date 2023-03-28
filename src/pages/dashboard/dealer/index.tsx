@@ -38,9 +38,46 @@ interface ButtonProps {
 
 const FButton: ButtonProps[] = [
     { text: 'Cycle Count' },
-    { text: '  Create PO' },
-    { text: '   Create Transfer' },
+    { text: 'Create PO' },
+    { text: 'Create Transfer' },
 ]
+
+
+// Inventory Table Data
+export interface RowType {
+    warehouse: string,
+    lastCounted: string,
+    totalParts: number,
+    costPrices: number,
+    salesPrices: number
+}
+// Function to create Row dummy data
+function createRowData(
+    warehouse: string,
+    lastCounted: string,
+    totalParts: number,
+    costPrices: number,
+    salesPrices: number,
+
+): RowType {
+    return {
+        warehouse,
+        lastCounted,
+        totalParts, costPrices,
+        salesPrices
+    };
+}
+// Array of row dummy data
+const rows = [
+    createRowData('YKT warehouse', '04/12/2022', 60, 24, 40),
+    createRowData('New york warehouse', '04/12/2022', 90, 37, 43),
+    createRowData('Eclair warehouse', '04/12/2022', 160, 24, 60),
+    createRowData('Cupcake warehouse', '04/12/2022', 37, 67, 43),
+    createRowData('Gingle warehouse', '04/12/2022', 160, 49, 39),
+];
+
+// Column header
+const head = ['Warehouse', 'Last Counted', 'Total Parts', 'Cost Prices', 'Sales Prices']
 
 const DealerPage: NextPage = () => {
     const isMounted = useMounted();
@@ -178,16 +215,7 @@ const DealerPage: NextPage = () => {
                             >
                                 Inventory
                             </Typography>
-                            {/* <Box sx={{ flexGrow: 1 }} />
-                            <Button
-                                color="primary"
-                                // onClick={() => setOpenCreateDialog(true)}
-                                size="large"
-                                startIcon={<PlusIcon fontSize="small" />}
-                                variant="contained"
-                            >
-                                Add
-                            </Button> */}
+
                         </Box>
                     </Box>
                     <ProductsSummary />
@@ -200,7 +228,7 @@ const DealerPage: NextPage = () => {
                             ))
                         }
                     </Stack>
-                    <InventoryTable title="Inventory from warhouse" />
+                    <InventoryTable title="Inventory from warehouse" rows={rows} head={head} />
                     <Card
                         sx={{
                             display: 'flex',
