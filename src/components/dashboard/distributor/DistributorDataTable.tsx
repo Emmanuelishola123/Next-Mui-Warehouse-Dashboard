@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Typography } from '@mui/material';
 import { Scrollbar } from 'src/components/scrollbar';
-import type { RowType } from 'src/pages/dashboard/dealer';
+import type { RowType } from 'src/pages/dashboard/distributor';
 
 
 interface propsType {
@@ -17,7 +17,7 @@ interface propsType {
     rows: RowType[]
 }
 
-export default function InventoryTable({ title, rows, head }: propsType) {
+export default function InventoryTable({ title = '', rows, head }: propsType) {
     return (
         <TableContainer component={Paper}>
             <Typography
@@ -26,7 +26,7 @@ export default function InventoryTable({ title, rows, head }: propsType) {
 
                 component="div"
             >
-                {title}
+                {title || ''}
             </Typography>
             <Scrollbar>
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -36,18 +36,18 @@ export default function InventoryTable({ title, rows, head }: propsType) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
+                        {rows.map((row, index) => (
                             <TableRow
-                                key={row.warehouse}
+                                key={index}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">
-                                    {row.warehouse}
+                                    {row.name}
                                 </TableCell>
-                                <TableCell align="left">{row.lastCounted}</TableCell>
-                                <TableCell align="left">${row.totalParts}</TableCell>
-                                <TableCell align="left">${row.costPrices}</TableCell>
-                                <TableCell align="left">${row.salesPrices}</TableCell>
+                                <TableCell align="left">{row.address}</TableCell>
+                                <TableCell align="left">{row.phoneNumber}</TableCell>
+                                <TableCell align="left">{row.ordersEmailAddress}</TableCell>
+                                <TableCell align="left">{row.apEmailAddress}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

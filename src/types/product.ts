@@ -32,4 +32,9 @@ export interface Product {
   tags?: string[];
   updatedAt: Date;
   variants?: ProductVariant[];
+  qty: number;
+  cost: number;
+  total: number;
+  sales: number;
+  tax: number;
 }

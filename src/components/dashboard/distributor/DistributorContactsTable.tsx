@@ -360,25 +360,23 @@ export default function DistributorProductsOrderedTable() {
                                         return (
                                             <TableRow
                                                 hover
-                                                // onClick={(event) => handleClick(event, row.name)}
+
                                                 role="checkbox"
-                                                // aria-checked={isItemSelected}
+                          
                                                 tabIndex={-1}
                                                 key={row.name}
-                                            // selected={isItemSelected}
+                    
                                             >
-                                                {/* <TableCell padding="checkbox">
-                                               
-                                                </TableCell> */}
+                                              
                                                 <TableCell
                                                     component="th"
                                                     id={labelId}
                                                     scope="row"
 
                                                 >
-                                                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                                                        <Button sx={{ bg: 'blue' }} variant='contained'>{row.action[0]}</Button>
-                                                        <Button sx={{ bg: 'red' }} variant='contained'>{row.action[1]}</Button>
+                                                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                                                        <Button size='small' sx={{ bg: 'blue' }} variant='contained'>{row.action[0]}</Button>
+                                                        <Button size='small' sx={{ bg: 'red' }} variant='contained'>{row.action[1]}</Button>
                                                     </Box>
                                                 </TableCell>
                                                 <TableCell align="right">{row.manufacturer}</TableCell>

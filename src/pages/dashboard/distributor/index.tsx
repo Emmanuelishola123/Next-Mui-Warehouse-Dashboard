@@ -7,6 +7,7 @@ import { productApi } from 'src/api/product';
 import NewDistributorDialog from 'src/components/dashboard/distributor/NewDistributorDialog';
 import { DistributorsFilter } from 'src/components/dashboard/distributor/DistributorFilter';
 import { DistributorTable } from 'src/components/dashboard/distributor/DistributorTable';
+import DistributorDataTable from 'src/components/dashboard/distributor/DistributorDataTable';
 import type { Product } from 'src/types/product';
 import { useMounted } from 'src/hooks/use-mounted';
 import { useSelection } from 'src/hooks/use-selection';
@@ -31,6 +32,48 @@ interface Controller {
   sortBy: string;
   view: string;
 }
+
+
+// Distributor Table Data
+export interface RowType {
+  name: string,
+  address: string,
+  phoneNumber: number,
+  ordersEmailAddress: string,
+  apEmailAddress: string
+}
+// Function to create Row dummy data
+function createRowData(
+  name: string,
+  address: string,
+  phoneNumber: number,
+  ordersEmailAddress: string,
+  apEmailAddress: string
+): RowType {
+  return {
+    name,
+    address,
+    phoneNumber,
+    ordersEmailAddress,
+    apEmailAddress,
+  };
+}
+// Array of row dummy data
+const rows = [
+  createRowData('Jason Triump', '12 road, new york', 191243954, 'orderemail@gmail.com', 'apemail@gmail.com'),
+  createRowData('Jason Triump', '12 road, new york', 191243954, 'orderemail@gmail.com', 'apemail@gmail.com'),
+  createRowData('Jason Triump', '12 road, new york', 191243954, 'orderemail@gmail.com', 'apemail@gmail.com'),
+  createRowData('Jason Triump', '12 road, new york', 191243954, 'orderemail@gmail.com', 'apemail@gmail.com'),
+  createRowData('Jason Triump', '12 road, new york', 191243954, 'orderemail@gmail.com', 'apemail@gmail.com'),
+  createRowData('Jason Triump', '12 road, new york', 191243954, 'orderemail@gmail.com', 'apemail@gmail.com'),
+
+];
+
+
+// Column header
+const head = ['Distributor Name', 'Address City State Zip', 'Phone Number', 'Orders Email Address', 'AP Email Address']
+
+
 
 const DistributorPage: NextPage = () => {
   const isMounted = useMounted();
@@ -163,12 +206,12 @@ const DistributorPage: NextPage = () => {
                 display: 'flex'
               }}
             >
-              {/* <Typography
-                                color="textPrimary"
-                                variant="h4"
-                            >
-                                Products
-                            </Typography> */}
+              <Typography
+                color="textPrimary"
+                variant="h4"
+              >
+                Distributor Page
+              </Typography>
               <Box sx={{ flexGrow: 1 }} />
               <Button
                 color="primary"
@@ -189,7 +232,7 @@ const DistributorPage: NextPage = () => {
               flexGrow: 1
             }}
           >
-            <DistributorsFilter
+            {/* <DistributorsFilter
               disabled={productsState.isLoading}
               filters={controller.filters}
               onFiltersApply={handleFiltersApply}
@@ -199,8 +242,8 @@ const DistributorPage: NextPage = () => {
               query={controller.query}
               selectedDistrubutors={selectedProducts}
               view={controller.view}
-            />
-            <Divider />
+            /> */}
+            {/* <Divider /> */}
             <DistributorTable
               error={productsState.error}
               isLoading={productsState.isLoading}
@@ -215,6 +258,9 @@ const DistributorPage: NextPage = () => {
               sort={controller.sort}
               sortBy={controller.sortBy}
             />
+
+            <Divider />
+            <DistributorDataTable title='Distributor Info' rows={rows} head={head} />
           </Card>
         </Container>
       </Box>

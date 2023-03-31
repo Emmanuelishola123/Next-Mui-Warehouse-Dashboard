@@ -41,7 +41,7 @@ const TrasferOverview = () => {
               color="textPrimary"
               variant="h4"
             >
-              Transfer
+              Transfer Page
             </Typography>
 
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>

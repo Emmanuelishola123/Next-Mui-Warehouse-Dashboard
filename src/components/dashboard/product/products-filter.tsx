@@ -32,6 +32,7 @@ interface OrdersFilterProps {
   query: string;
   selectedProducts: string[];
   view: string;
+  warehouse?: boolean
 }
 
 const views = [
@@ -50,6 +51,32 @@ const views = [
   {
     label: 'Archived',
     value: 'archived'
+  }
+];
+const warehouseView = [
+  {
+    label: 'All',
+    value: 'all'
+  },
+  {
+    label: 'Published',
+    value: 'published'
+  },
+  {
+    label: 'Draft',
+    value: 'draft'
+  },
+  {
+    label: 'Archived',
+    value: 'archived'
+  },
+  {
+    label: 'Audit',
+    value: 'audit'
+  },
+  {
+    label: 'Deviation',
+    value: 'deviation'
   }
 ];
 
@@ -96,7 +123,8 @@ export const ProductsFilter: FC<OrdersFilterProps> = (props) => {
     onViewChange,
     query,
     selectedProducts,
-    view
+    view,
+    warehouse = false
   } = props;
   const [openFilterDialog, setOpenFilterDialog] = useState(false);
 
@@ -116,7 +144,14 @@ export const ProductsFilter: FC<OrdersFilterProps> = (props) => {
             value={view}
             variant="scrollable"
           >
-            {views.map((option) => (
+            {warehouse ? warehouseView.map((option) => (
+              <Tab
+                disabled={disabled}
+                key={option.label}
+                label={option.label}
+                value={option.value}
+              />
+            )) : views.map((option) => (
               <Tab
                 disabled={disabled}
                 key={option.label}

@@ -41,15 +41,15 @@ export const NewDistributorDialog: FC<NewDistributorDialogProps> = (props) => {
         }),
         onSubmit: async (values, helpers) => {
             try {
-                toast.success('New Distributor Created');
                 helpers.setStatus({ success: true });
                 helpers.setSubmitting(false);
+                toast.success('New Distributor Created');
                 helpers.resetForm();
                 onClose?.();
             } catch (err) {
                 console.error(err);
                 helpers.setStatus({ success: false });
-                helpers.setErrors({ submit: err.message });
+                // helpers.setErrors({ errors:{ ...err!.message} });
                 helpers.setSubmitting(false);
             }
         }
@@ -168,16 +168,16 @@ export const NewDistributorDialog: FC<NewDistributorDialogProps> = (props) => {
                             value={formik.values.distributorPhone}
                         />
                     </Grid>
-                    {formik.errors.submit && (
+                    {/* {formik.errors && (
                         <Grid
                             item
                             xs={12}
                         >
                             <FormHelperText error>
-                                {formik.errors.submit}
+                                {formik.errors.}
                             </FormHelperText>
                         </Grid>
-                    )}
+                    )} */}
                 </Grid>
                 <Divider sx={{ my: 4 }} />
                 <Box>

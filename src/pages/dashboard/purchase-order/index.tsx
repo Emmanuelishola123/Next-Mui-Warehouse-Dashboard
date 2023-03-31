@@ -182,7 +182,7 @@ const PurchaseOrder: NextPage = () => {
                                 color="textPrimary"
                                 variant="h4"
                             >
-                                Purchase Order
+                                Purchase Order Page
                             </Typography>
                             <Box sx={{ flexGrow: 1 }} />
                             <Button

@@ -9,9 +9,11 @@ import { ProductsFilter } from 'src/components/dashboard/product/products-filter
 import { ProductsSummary } from 'src/components/dashboard/product/products-summary';
 import { ProductsTable } from 'src/components/dashboard/product/products-table';
 import type { Product } from 'src/types/product';
-import { useMounted } from 'src/hooks/use-mounted'; 
+import { useMounted } from 'src/hooks/use-mounted';
 import { useSelection } from 'src/hooks/use-selection';
 import InventoryTable from 'src/components/dashboard/dealer/InventoryTable';
+import CreateTransfer from 'src/components/dashboard/transfer/CreateTransfer';
+import CreatePurchaseOrder from 'src/components/dashboard/purchase-order/CreatePurchaseOrder';
 
 interface ProductsState {
     data?: {
@@ -42,6 +44,43 @@ const FButton: ButtonProps[] = [
     { text: '   Create Transfer' },
 ]
 
+
+// Inventory Table Data
+export interface RowType {
+    warehouse: string,
+    lastCounted: string,
+    totalParts: number,
+    costPrices: number,
+    salesPrices: number
+}
+// Function to create Row dummy data
+function createRowData(
+    warehouse: string,
+    lastCounted: string,
+    totalParts: number,
+    costPrices: number,
+    salesPrices: number,
+
+): RowType {
+    return {
+        warehouse,
+        lastCounted,
+        totalParts, costPrices,
+        salesPrices
+    };
+}
+// Array of row dummy data
+const rows = [
+    createRowData('YKT warehouse', '04/12/2022', 60, 24, 40),
+    createRowData('New york warehouse', '04/12/2022', 90, 37, 43),
+    createRowData('Eclair warehouse', '04/12/2022', 160, 24, 60),
+    createRowData('Cupcake warehouse', '04/12/2022', 37, 67, 43),
+    createRowData('Gingle warehouse', '04/12/2022', 160, 49, 39),
+];
+
+// Column header
+const head = ['Warehouse', 'Last Counted', 'Total Parts', 'Cost Prices', 'Sales Prices']
+
 const Warehouse: NextPage = () => {
     const isMounted = useMounted();
     const [controller, setController] = useState<Controller>({
@@ -58,7 +97,9 @@ const Warehouse: NextPage = () => {
         handleSelect,
         handleSelectAll
     ] = useSelection(productsState.data?.products);
-    const [openCreateDialog, setOpenCreateDialog] = useState(false);
+    const [createTransfer, setCreateTransfer] = useState(false);
+    const [createPO, setCreatePO] = useState(false);
+
 
     const getProducts = useCallback(async () => {
         setProductsState(() => ({ isLoading: true }));
@@ -97,7 +138,7 @@ const Warehouse: NextPage = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [controller]);
 
-   
+
 
     const handleViewChange = (newView: string): void => {
         setController({
@@ -167,8 +208,7 @@ const Warehouse: NextPage = () => {
                         py: 4
                     }}
 
-                >
-                    {/* <Box sx={{ py: 4 }}>
+                > <Box sx={{ py: 4 }}>
                         <Box
                             sx={{
                                 alignItems: 'center',
@@ -179,31 +219,24 @@ const Warehouse: NextPage = () => {
                                 color="textPrimary"
                                 variant="h4"
                             >
-                                Products
+                                Warehouse List Page
                             </Typography>
-                            <Box sx={{ flexGrow: 1 }} />
-                            <Button
-                                color="primary"
-                                onClick={() => setOpenCreateDialog(true)}
-                                size="large"
-                                startIcon={<PlusIcon fontSize="small" />}
-                                variant="contained"
-                            >
-                                Add
-                            </Button>
+
                         </Box>
-                    </Box> */}
+                    </Box>
                     <ProductsSummary />
                     <Stack spacing={2} direction="row" sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1, mb: 4 }}>
-                        {
-                            FButton.map((text: ButtonProps) => (
-                                <Button key={text.text} variant='contained' disableElevation>
-                                    {text.text}
-                                </Button >
-                            ))
-                        }
+                        <Button variant='contained' disableElevation >
+                            Cycle Count
+                        </Button >
+                        <Button variant='contained' disableElevation onClick={() => setCreatePO(true)}>
+                            Create PO
+                        </Button >
+                        <Button variant='contained' disableElevation onClick={() => setCreateTransfer(true)}>
+                            Create Transfer
+                        </Button >
                     </Stack>
-                    <InventoryTable title="Inventory from warhouse" />
+                    <InventoryTable title="Inventory from warhouse" rows={rows} head={head} />
                     <Card
                         sx={{
                             display: 'flex',
@@ -222,6 +255,7 @@ const Warehouse: NextPage = () => {
                             query={controller.query}
                             selectedProducts={selectedProducts}
                             view={controller.view}
+                            warehouse={true}
                         />
                         <Divider />
                         <ProductsTable
@@ -241,9 +275,13 @@ const Warehouse: NextPage = () => {
                     </Card>
                 </Container>
             </Box>
-            <ProductCreateDialog
-                onClose={() => setOpenCreateDialog(false)}
-                open={openCreateDialog}
+            <CreateTransfer
+                onClose={() => setCreateTransfer(false)}
+                open={createTransfer}
+            />
+            <CreatePurchaseOrder
+                onClose={() => setCreatePO(false)}
+                open={createPO}
             />
         </>
     );

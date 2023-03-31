@@ -48,12 +48,32 @@ const columns = [
     label: 'Name'
   },
   {
+    id: 'qty',
+    label: 'QTY'
+  },
+  {
+    id: 'cost',
+    label: 'Cost'
+  },
+  {
+    id: 'total',
+    label: 'Total'
+  },
+  {
+    id: 'sales',
+    label: 'Sales'
+  },
+  {
     id: 'updatedAt',
     label: 'Updated'
   },
   {
     id: 'status',
     label: 'Status'
+  },
+  {
+    id: 'tax',
+    label: 'Taxable'
   }
 ];
 
@@ -164,8 +184,8 @@ export const ProductsTable: FC<OrdersTableProps> = (props) => {
                         alt={product.name}
                         src={product.image}
                         sx={{
-                          width: 64,
-                          height: 64
+                          width: 48,
+                          height: 48
                         }}
                         variant="rounded"
                       />
@@ -181,7 +201,7 @@ export const ProductsTable: FC<OrdersTableProps> = (props) => {
                             underline="none"
                             variant="subtitle2"
                           >
-                            {product.name}
+                            {product.sku}
                           </Link>
                         </NextLink>
                         <Typography
@@ -189,10 +209,55 @@ export const ProductsTable: FC<OrdersTableProps> = (props) => {
                           sx={{ mt: 1 }}
                           variant="body2"
                         >
-                          12 in stock for 1 variant
+                          {/* {product.qty} in stock for 1 variant */}
+                          {product.description}
                         </Typography>
                       </Box>
                     </Box>
+                  </TableCell>
+                  <TableCell>
+                    <div>
+                      <Typography
+                        color="inherit"
+                        variant="body2"
+                      >
+                        {product.qty}
+                      </Typography>
+                     
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div>
+                      <Typography
+                        color="inherit"
+                        variant="body2"
+                      >
+                        {product.cost}
+                      </Typography>
+                     
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div>
+                      <Typography
+                        color="inherit"
+                        variant="body2"
+                      >
+                        {product.total}
+                      </Typography>
+                     
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div>
+                      <Typography
+                        color="inherit"
+                        variant="body2"
+                      >
+                        {product.sales}
+                      </Typography>
+                     
+                    </div>
                   </TableCell>
                   <TableCell>
                     <div>

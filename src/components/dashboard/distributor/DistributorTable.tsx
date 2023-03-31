@@ -15,7 +15,7 @@ import {
     TableHead,
     TableRow,
     TableSortLabel,
-    Typography
+    IconButton
 } from '@mui/material';
 import type { Product } from '../../../types/product';
 import { Pagination } from '../../pagination';
@@ -24,6 +24,10 @@ import { ResourceUnavailable } from '../../resource-unavailable';
 import { Scrollbar } from '../../scrollbar';
 import { Status } from '../../status';
 import { DistributorMenu } from './DistributorMenu';
+import { ExternalLink } from 'src/icons/external-link';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+
 
 interface DistributorsTableProps {
     error: string;
@@ -46,12 +50,24 @@ const columns = [
         label: 'Name'
     },
     {
-        id: 'updatedAt',
-        label: 'Updated'
+        id: 'email',
+        label: 'Email'
     },
     {
-        id: 'status',
-        label: 'Status'
+        id: 'phoneNumber',
+        label: 'Phone Number'
+    },
+    {
+        id: 'mainContact',
+        label: 'Main Contact'
+    },
+    {
+        id: 'contactEmail',
+        label: 'Contact Main'
+    },
+    {
+        id: 'notes',
+        label: 'Notes'
     }
 ];
 
@@ -112,7 +128,8 @@ export const DistributorTable: FC<DistributorsTableProps> = (props) => {
                                         && selectedProducts?.length < products?.length
                                     }
                                     onChange={onSelectAll}
-                                />
+                                    
+                                /> Action
                             </TableCell>
                             {columns.map((column) => (
                                 <TableCell key={column.id}>
@@ -144,79 +161,44 @@ export const DistributorTable: FC<DistributorsTableProps> = (props) => {
                                     )}
                                 >
                                     <TableCell padding="checkbox">
-                                        <Checkbox
+                                       <Box sx={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+                                       <Checkbox
                                             checked={!!selectedProducts.find(
                                                 (selectedCustomer) => selectedCustomer === product.id
                                             )}
                                             onChange={(event) => onSelect(event, product.id)}
                                         />
-                                    </TableCell>
-                                    <TableCell>
-                                        <Box
-                                            sx={{
-                                                alignItems: 'center',
-                                                display: 'flex'
-                                            }}
-                                        >
-                                            <Avatar
-                                                alt={product.name}
-                                                src={product.image}
-                                                sx={{
-                                                    width: 64,
-                                                    height: 64
-                                                }}
-                                                variant="rounded"
-                                            />
-                                            <Box sx={{ ml: 2 }}>
-                                                <NextLink
-                                                    href="/dashboard/products/1"
-                                                    passHref
-                                                >
-                                                    <Link
-                                                        color="inherit"
-                                                        component="a"
-                                                        sx={{ display: 'block' }}
-                                                        underline="none"
-                                                        variant="subtitle2"
-                                                    >
-                                                        {product.name}
-                                                    </Link>
-                                                </NextLink>
-                                                <Typography
-                                                    color="textSecondary"
-                                                    sx={{ mt: 1 }}
-                                                    variant="body2"
-                                                >
-                                                    12 in stock for 1 variant
-                                                </Typography>
-                                            </Box>
+
+                                        <IconButton sx={{borderRadius: '50%'}}>
+                                        <ExternalLink />
+                                        </IconButton>
+                                        <IconButton sx={{borderRadius: '50%'}}>
+                                        <DeleteIcon color='error' />
+                                        </IconButton>
                                         </Box>
                                     </TableCell>
                                     <TableCell>
-                                        <div>
-                                            <Typography
-                                                color="inherit"
-                                                variant="body2"
-                                            >
-                                                {format(product.updatedAt, 'dd MMM yyyy')}
-                                            </Typography>
-                                            <Typography
-                                                color="textSecondary"
-                                                variant="body2"
-                                            >
-                                                {format(product.updatedAt, 'HH:mm')}
-                                            </Typography>
-                                        </div>
+                                        {product.name.slice(0,12)}
                                     </TableCell>
                                     <TableCell>
-                                        <Status
-                                            color={statusVariant?.color}
-                                            label={statusVariant?.label}
-                                        />
+                                        {product.name.slice(0, 4)}@gmail.com
                                     </TableCell>
-                                    <TableCell align="right">
+                                    <TableCell>
+                                        {product.sku}
+                                    </TableCell>
+                                    <TableCell>
+                                        {product.name.slice(0, 4)}@gmail.com
+                                    </TableCell>
+                                    <TableCell>
+                                        {product.name.slice(0, 4)}@gmail.com
+                                    </TableCell>
+                                   
+                                    <TableCell>
+                                        {product.description}
+                                    </TableCell>
+                                    {/* <TableCell align="right">
                                         <DistributorMenu />
-                                    </TableCell>
+                                    </TableCell> */}
                                 </TableRow>
                             );
                         })}
