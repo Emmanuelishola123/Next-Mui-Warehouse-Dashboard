@@ -360,23 +360,19 @@ export default function DistributorProductsOrderedTable() {
                                         return (
                                             <TableRow
                                                 hover
-
                                                 role="checkbox"
-                          
                                                 tabIndex={-1}
                                                 key={row.name}
-                    
                                             >
                                               
                                                 <TableCell
                                                     component="th"
                                                     id={labelId}
                                                     scope="row"
-
                                                 >
                                                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                                                        <Button size='small' sx={{ bg: 'blue' }} variant='contained'>{row.action[0]}</Button>
-                                                        <Button size='small' sx={{ bg: 'red' }} variant='contained'>{row.action[1]}</Button>
+                                                        <Button size='small' variant='contained' color="success">{row.action[0]}</Button>
+                                                        <Button size='small'   variant='contained' color="error">{row.action[1]}</Button>
                                                     </Box>
                                                 </TableCell>
                                                 <TableCell align="right">{row.manufacturer}</TableCell>

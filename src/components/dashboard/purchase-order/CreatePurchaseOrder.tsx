@@ -16,14 +16,12 @@ import {
   FormControl,
   InputLabel,
   Select,
-  OutlinedInput,
   SelectChangeEvent
 } from '@mui/material';
-import { InputField } from '../../input-field';
 import NewPurchaseOrderTable from './NewPurchaseOrderTable'
 import { MenuItem } from '@mui/material';
 import { productApi } from 'src/api/product';
-import { Product } from 'src/types/product';
+
 
 
 interface OrderCreateDialogProps {
@@ -49,7 +47,7 @@ const CreatePurchaseOrder: FC<OrderCreateDialogProps> = (props) => {
     try {
       const result = await productApi.getRawProducts();
       setProducts(result.products)
-      setSelectedProduct(result.products[0])
+      setSelectedProduct({...result.products[0]})
     } catch (err) {
       console.error(err);
 

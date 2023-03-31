@@ -54,13 +54,13 @@ function createData(
 }
 
 const rows = [
-    createData(['View', 'Edit'], 'Monitoring', 1233, 'Name 1', 'Not Monitoring', 'Monitoring Sales', true, 120.00, 120.00, true),
-    createData(['View', 'Edit'], 'Monitoring', 1233, 'Name 1', 'Not Monitoring', 'Monitoring Sales', true, 120.00, 120.00, false),
-    createData(['View', 'Edit'], 'Monitoring', 1233, 'Name 1', 'Not Monitoring', 'Monitoring Sales', true, 120.00, 120.00, false),
-    createData(['View', 'Edit'], 'Monitoring', 1233, 'Name 1', 'Not Monitoring', 'Monitoring Sales', true, 120.00, 120.00, true),
-    createData(['View', 'Edit'], 'Monitoring', 1233, 'Name 1', 'Not Monitoring', 'Monitoring Sales', true, 120.00, 120.00, true),
-    createData(['View', 'Edit'], 'Monitoring', 1233, 'Name 1', 'Not Monitoring', 'Monitoring Sales', true, 120.00, 120.00, false),
-    createData(['View', 'Edit'], 'Monitoring', 1233, 'Name 1', 'Not Monitoring', 'Monitoring Sales', true, 120.00, 120.00, false),
+    createData(['View', 'Delete'], 'Monitoring', 1233, 'Name 1', 'Not Monitoring', 'Monitoring Sales', true, 120.00, 120.00, true),
+    createData(['View', 'Delete'], 'Monitoring', 1233, 'Name 1', 'Not Monitoring', 'Monitoring Sales', true, 120.00, 120.00, false),
+    createData(['View', 'Delete'], 'Monitoring', 1233, 'Name 1', 'Not Monitoring', 'Monitoring Sales', true, 120.00, 120.00, false),
+    createData(['View', 'Delete'], 'Monitoring', 1233, 'Name 1', 'Not Monitoring', 'Monitoring Sales', true, 120.00, 120.00, true),
+    createData(['View', 'Delete'], 'Monitoring', 1233, 'Name 1', 'Not Monitoring', 'Monitoring Sales', true, 120.00, 120.00, true),
+    createData(['View', 'Delete'], 'Monitoring', 1233, 'Name 1', 'Not Monitoring', 'Monitoring Sales', true, 120.00, 120.00, false),
+    createData(['View', 'Delete'], 'Monitoring', 1233, 'Name 1', 'Not Monitoring', 'Monitoring Sales', true, 120.00, 120.00, false),
 ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -381,8 +381,8 @@ export default function DistributorProductsOrderedTable() {
 
                                                 >
                                                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                                                        <Button sx={{ bg: 'blue' }} variant='contained'>{row.action[0]}</Button>
-                                                        <Button sx={{ bg: 'red' }} variant='contained'>{row.action[1]}</Button>
+                                                        <Button color='success' variant='contained'>{row.action[0]}</Button>
+                                                        <Button color='error' variant='contained'>{row.action[1]}</Button>
                                                     </Box>
                                                 </TableCell>
                                                 <TableCell align="right">{row.manufacturer}</TableCell>
